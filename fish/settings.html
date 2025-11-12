@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings - Fish Market</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="settings-body">
+
+  <nav class="navbar">
+    <div class="nav-left">
+      <span class="nav-logo">⚙️</span>
+      <h2>Settings</h2>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="seller.html">Seller</a></li>
+      <li><a href="signin.html">Sign-In</a></li>
+    </ul>
+  </nav>
+
+  <section class="settings-container">
+    <h1>Account Settings</h1>
+
+    <div class="settings-card">
+      <h2>👤 Profile Information</h2>
+      <p><strong>Email:</strong> <span id="userEmail">Loading...</span></p>
+      <label>Name:</label>
+      <input type="text" id="userName" placeholder="Enter your name" />
+      <label>Phone:</label>
+      <input type="tel" id="userPhone" placeholder="Enter your phone" />
+      <button id="saveProfile">💾 Save Profile</button>
+    </div>
+
+    <div class="settings-card">
+      <h2>🏪 Shop Information</h2>
+      <label>Shop Name:</label>
+      <input type="text" id="shopNameSetting" placeholder="Your shop name" />
+      <label>Location:</label>
+      <input type="text" id="shopLocationSetting" placeholder="Your shop location" />
+      <button id="saveShop">💾 Save Shop Info</button>
+    </div>
+
+    <div class="settings-card">
+      <h2>🎨 Theme</h2>
+      <button id="toggleTheme">🌞 Switch to Dark Mode</button>
+    </div>
+
+    <div class="settings-card">
+      <h2>🔔 Notifications</h2>
+      <label>
+        <input type="checkbox" id="notifyOrders" />
+        Enable Order Notifications
+      </label>
+    </div>
+
+    <div class="settings-card danger-zone">
+      <h2>🗑️ Data & Account</h2>
+      <button id="clearData">Clear My Fish Listings</button>
+      <button id="logoutBtn">🚪 Log Out</button>
+    </div>
+
+  </section>
+
+  <script src="scripts/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In - Fish Market</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body class="signin-body">
+  <nav class="navbar">
+    <div class="nav-left">
+      <span class="nav-logo">🐠</span>
+      <h2>Fish Market</h2>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="seller.html">Seller</a></li>
+    </ul>
+  </nav>
+
+  <section class="signin-section">
+    <h1>Welcome Back!</h1>
+
+    <!-- Email/Password Sign-In -->
+    <form id="signinForm">
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="Enter your email" required />
+      <label for="password">Password:</label>
+      <input type="password" id="password" placeholder="Enter your password" required />
+      <button type="submit">🔑 Sign In</button>
+    </form>
+
+    <p class="note">
+      Don’t have an account? <span class="link" id="createAccountLink">Create Account</span>
+    </p>
+
+    <!-- Google Sign-In -->
+    <div id="g_id_onload"
+         data-client_id="YOUR_REAL_CLIENT_ID.apps.googleusercontent.com"
+         data-callback="handleGoogleSignIn"
+         data-auto_prompt="false">
+    </div>
+    <div class="g_id_signin" data-type="standard"></div>
+  </section>
+
+  <!-- Signup Modal -->
+  <div id="signupModal" class="order-modal hidden">
+    <div class="modal-content">
+      <span class="close-btn" id="closeSignup">&times;</span>
+      <h2>Create New Account</h2>
+      <form id="signupForm">
+        <input type="text" id="signupName" placeholder="Full Name" required />
+        <input type="email" id="signupEmail" placeholder="Email" required />
+        <input type="tel" id="signupPhone" placeholder="Phone Number" required />
+        <input type="password" id="signupPassword" placeholder="Password" required />
+        <button type="submit">✨ Create Account</button>
+      </form>
+    </div>
+  </div>
+
+<script>
+  // Email/Password Sign-In
+  const signinForm = document.getElementById("signinForm");
+  signinForm.addEventListener("submit", e => {
+    e.preventDefault();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const user = users.find(u => u.email === email && u.password === password);
+    if (user) {
+      localStorage.setItem("sellerUser", JSON.stringify(user));
+      window.location.href = "index.html";
+    } else {
+      alert("❌ Invalid credentials!");
+    }
+  });
+
+  // Show Signup Modal
+  const signupModal = document.getElementById("signupModal");
+  document.getElementById("createAccountLink").addEventListener("click", () => signupModal.classList.remove("hidden"));
+  document.getElementById("closeSignup").addEventListener("click", () => signupModal.classList.add("hidden"));
+
+  // Signup Form
+  document.getElementById("signupForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const newUser = {
+      name: document.getElementById("signupName").value,
+      email: document.getElementById("signupEmail").value,
+      phone: document.getElementById("signupPhone").value,
+      password: document.getElementById("signupPassword").value
+    };
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    users.push(newUser);
+    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("sellerUser", JSON.stringify(newUser));
+    signupModal.classList.add("hidden");
+    window.location.href = "index.html";
+  });
+
+  // Google Login Handler
+  function handleGoogleSignIn(response) {
+    const data = JSON.parse(atob(response.credential.split('.')[1]));
+    const user = {
+      name: data.name,
+      email: data.email,
+      picture: data.picture
+    };
+    localStorage.setItem("sellerUser", JSON.stringify(user));
+    window.location.href = "index.html";
+  }
+</script>
+</body>
+</html>

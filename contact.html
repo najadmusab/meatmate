@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | Meatfy</title>
+
+  <style>
+    /* ---------- Global Styles ---------- */
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(-45deg, #0f0f0f, #1a1a1a, #232323, #101010);
+      background-size: 400% 400%;
+      animation: bgShift 12s ease infinite;
+      color: #fff;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      text-align: center;
+      animation: fadeDown 1s ease;
+    }
+
+    p {
+      margin-bottom: 40px;
+      opacity: 0.8;
+      text-align: center;
+      animation: fadeDown 1.2s ease;
+    }
+
+    /* ---------- Contact Form ---------- */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 90%;
+      max-width: 450px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+      animation: fadeUp 1.3s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    label {
+      font-size: 1rem;
+      color: #ddd;
+      letter-spacing: 0.5px;
+    }
+
+    input, textarea {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 1rem;
+      resize: none;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #ff6b6b;
+      box-shadow: 0 0 10px rgba(255, 107, 107, 0.4);
+    }
+
+    button {
+      padding: 14px;
+      background: linear-gradient(90deg, #ff5f6d, #ffc371);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 99, 99, 0.6);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 15px;
+      font-size: 0.9rem;
+      opacity: 0.7;
+      text-align: center;
+    }
+
+    /* ---------- Animations ---------- */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-25px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bgShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Contact <span style="color:#ff6b6b;">Meatfy</span></h1>
+  <p>Have a question or want to order? Send us a message on WhatsApp!</p>
+
+  <form id="contactForm">
+    <label for="name">Full Name</label>
+    <input type="text" id="name" placeholder="Enter your name" required />
+
+    <label for="message">Message</label>
+    <textarea id="message" rows="4" placeholder="Write your message..." required></textarea>
+
+    <button type="submit">Send Message</button>
+  </form>
+
+  <footer>© 2025 Meatfy | Fresh. Clean. Delivered.</footer>
+
+  <script>
+    // WhatsApp redirection
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      if (name && message) {
+        const phoneNumber = "9526226011"; // Your WhatsApp number
+        const text = `Hello Meatfy! 👋%0A%0AMy name is ${name}.%0A%0A${message}`;
+        const url = `https://wa.me/${phoneNumber}?text=${text}`;
+        window.open(url, "_blank");
+      } else {
+        alert("Please fill out all fields before sending!");
+      }
+    });
+  </script>
+</body>
+</html>

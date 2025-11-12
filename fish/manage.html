@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage All Seller Fish</title>
+<style>
+  body { font-family: Arial; background:#f0f4f8; padding:20px; }
+  h1 { text-align:center; color:#0077cc; }
+  .fish-card { 
+    background:#fff; 
+    border:1px solid #ccc; 
+    padding:15px; 
+    margin:10px 0; 
+    display:flex; 
+    justify-content:space-between; 
+    align-items:center; 
+    border-radius:8px; 
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+  }
+  .fish-card img { max-width:100px; border-radius:6px; }
+  .delete-btn { 
+    background:#ff4d4d; 
+    color:#fff; 
+    border:none; 
+    padding:8px 12px; 
+    border-radius:5px; 
+    cursor:pointer; 
+    transition:background 0.3s;
+  }
+  .delete-btn:hover { background:#e60000; }
+</style>
+</head>
+<body>
+
+<h1>Manage All Seller Fish</h1>
+<div id="manageFishList"><p>Loading...</p></div>
+
+<!-- ✅ Firebase Scripts -->
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
+
+<script>
+// 🔐 Simple admin access
+const pwd = prompt("Enter admin password:");
+if (pwd !== "1234") {
+  alert("Incorrect password! Redirecting...");
+  window.location.href = "index.html";
+}
+
+// ✅ Your Firebase Configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBekUGQp88BILN7wvdFQOCxh3TiNx2Uf5A",
+  authDomain: "meatfyll.firebaseapp.com",
+  databaseURL: "https://meatfyll-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "meatfyll",
+  storageBucket: "meatfyll.firebasestorage.app",
+  messagingSenderId: "996875029846",
+  appId: "1:996875029846:web:c293c3118952de1acf1af7"
+};
+
+// ✅ Initialize Firebase
+const app = firebase.initializeApp(firebaseConfig);
+const db = firebase.database(app);
+
+// ✅ HTML container
+const manageFishList = document.getElementById('manageFishList');
+
+// 🔄 Load all fish data from Firebase
+function loadFishData() {
+  db.ref('images').once('value', (snapshot) => {
+    const data = snapshot.val();
+    manageFishList.innerHTML = '';
+
+    if (!data) {
+      manageFishList.innerHTML = '<p style="text-align:center;">No fish available.</p>';
+      return;
+    }
+
+    Object.keys(data).forEach((key) => {
+      const fish = data[key];
+      const card = document.createElement('div');
+      card.classList.add('fish-card');
+      card.innerHTML = `
+        <div>
+          <h3>${fish.fishName || 'Unnamed'} (${fish.weight || 'N/A'}kg)</h3>
+          <p><strong>Shop:</strong> ${fish.shopName || 'Unknown'}</p>
+          <p><strong>Price:</strong> ₹${fish.price || '0'}</p>
+          <p><strong>Location:</strong> ${fish.location || 'Not specified'}</p>
+          <img src="${fish.image}" alt="${fish.fishName}" />
+        </div>
+        <div>
+          <button class="delete-btn" data-id="${key}">Delete</button>
+        </div>
+      `;
+      manageFishList.appendChild(card);
+    });
+
+    // 🗑️ Delete fish button
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const fishId = btn.dataset.id;
+        if (confirm("Delete this fish?")) {
+          await db.ref('images/' + fishId).remove();
+          alert("✅ Fish deleted successfully!");
+          loadFishData(); // Refresh list
+        }
+      });
+    });
+  });
+}
+
+// 🚀 Load data on page start
+loadFishData();
+</script>
+
+</body>
+</html>

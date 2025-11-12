@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Cart - Fish Market</title>
+<link rel="stylesheet" href="fish.css">
+<style>
+/* Cart Page Specific Styles */
+body { font-family: sans-serif; margin:0; padding:0; background: #f0f0f0; }
+header { background: #00ffc6; padding: 15px; text-align:center; font-size:24px; font-weight:bold; }
+.container { max-width: 1000px; margin: 20px auto; padding: 10px; }
+.cart-item, .order-item { display: flex; align-items: center; background:#fff; margin-bottom:10px; padding:10px; border-radius:8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.cart-item img, .order-item img { width:80px; height:80px; object-fit:cover; border-radius:5px; margin-right:15px; }
+.cart-item div, .order-item div { flex:1; }
+.cart-item select { padding:5px; }
+.cart-item .remove { cursor:pointer; color:red; font-weight:bold; margin-left:10px; }
+.total { text-align:right; font-size:20px; margin-top:15px; font-weight:bold; }
+.buttons { text-align:center; margin-top:20px; }
+.buttons button { background:#00ffc6; border:none; padding:10px 25px; margin:5px; font-size:16px; cursor:pointer; border-radius:8px; transition:0.3s; }
+.buttons button:hover { background:#00d3a0; }
+</style>
+</head>
+<body>
+
+<header>🛒 My Cart</header>
+
+<div class="container">
+  <div id="cartItems"></div>
+  <div class="total" id="totalAmount">Total: ₹0</div>
+  <div class="buttons">
+    <button id="continueShopping">⬅️ Continue Shopping</button>
+    <button id="proceedOrder">⚡ Proceed to Order</button>
+  </div>
+</div>
+
+<script src="fish.js"></script>
+<script>
+  // Load Cart from localStorage
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartItemsDiv = document.getElementById("cartItems");
+  const totalAmount = document.getElementById("totalAmount");
+
+  function updateCartUI() {
+    cartItemsDiv.innerHTML = "";
+    let total = 0;
+
+    if(cart.length === 0) {
+      cartItemsDiv.innerHTML = "<p>Your cart is empty!</p>";
+      totalAmount.innerText = "Total: ₹0";
+      return;
+    }
+
+    cart.forEach((item, index) => {
+      const div = document.createElement("div");
+      div.classList.add("cart-item");
+      div.innerHTML = `
+        <img src="${item.image}" alt="${item.name}">
+        <div>
+          <strong>${item.name}</strong><br>
+          ₹${item.price}/kg
+        </div>
+        <select data-index="${index}" class="qtySelect">
+          <option value="0.5" ${item.quantity == "0.5" ? "selected" : ""}>½ kg</option>
+          <option value="1" ${item.quantity == "1" ? "selected" : ""}>1 kg</option>
+          <option value="2" ${item.quantity == "2" ? "selected" : ""}>2 kg</option>
+          <option value="3" ${item.quantity == "3" ? "selected" : ""}>3 kg</option>
+        </select>
+        <span class="remove" data-index="${index}">✖</span>
+      `;
+      cartItemsDiv.appendChild(div);
+
+      total += item.price * parseFloat(item.quantity);
+    });
+
+    totalAmount.innerText = `Total: ₹${total.toFixed(2)}`;
+
+    // handle quantity change
+    document.querySelectorAll(".qtySelect").forEach(sel => {
+      sel.addEventListener("change", e => {
+        const idx = e.target.dataset.index;
+        cart[idx].quantity = e.target.value;
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartUI();
+      });
+    });
+
+    // handle remove
+    document.querySelectorAll(".remove").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const idx = btn.dataset.index;
+        cart.splice(idx, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartUI();
+      });
+    });
+  }
+
+  updateCartUI();
+
+  // Buttons
+  document.getElementById("continueShopping").addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+
+  document.getElementById("proceedOrder").addEventListener("click", () => {
+    if(cart.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
+    localStorage.setItem("currentCart", JSON.stringify(cart));
+    window.location.href = "order.html";
+  });
+</script>
+
+</body>
+</html>

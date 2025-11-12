@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order - Fish Market</title>
+  <link rel="stylesheet" href="fish.css" />
+  <style>
+    body { font-family: "Poppins", sans-serif; background: #f0f4f8; margin:0; padding:0; }
+    .navbar { display:flex; justify-content:space-between; align-items:center; padding:10px 20px; background:#009688; color:#fff; }
+    .nav-links li { display:inline-block; margin-left:20px; }
+    .nav-links a { color:#fff; text-decoration:none; font-weight:600; }
+    .order-section { max-width:900px; margin:50px auto; background:#fff; padding:30px; border-radius:15px; box-shadow:0 4px 20px rgba(0,0,0,0.1); }
+    h1 { text-align:center; color:#009688; }
+    .order-content { display:flex; flex-wrap:wrap; gap:30px; margin-top:30px; }
+    .customer-info, .order-summary { flex:1; min-width:280px; background:#f9f9f9; padding:20px; border-radius:12px; }
+    input { width:100%; padding:10px; margin:10px 0; border-radius:8px; border:1px solid #ccc; }
+    button { background:#009688; color:#fff; border:none; border-radius:8px; padding:10px 20px; cursor:pointer; font-weight:600; margin-top:10px; }
+    button:hover { background:#00796b; }
+    .popular-places button { margin:5px 5px 0 0; background:#e0f2f1; color:#00796b; }
+    #orderItem img { border-radius:10px; margin-top:10px; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <span class="nav-logo">🐠</span>
+      <h2>Fish Market</h2>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="seller.html">Seller</a></li>
+    </ul>
+  </nav>
+
+  <!-- Order Section -->
+  <section class="order-section">
+    <h1>🧾 Confirm Your Order</h1>
+    <div class="order-content">
+      <!-- Customer Info -->
+      <div class="customer-info">
+        <h2>Customer Details</h2>
+        <label>Name:</label>
+        <input type="text" id="custName" placeholder="Enter your name" required />
+        <label>Phone Number:</label>
+        <input type="tel" id="custPhone" placeholder="Enter phone number" required />
+        <label>Delivery Location:</label>
+        <input type="text" id="custAddress" placeholder="Your delivery address" required />
+      </div>
+
+      <!-- Order Summary -->
+      <div class="order-summary">
+        <h2>Your Order</h2>
+        <div id="orderItem"></div>
+        <h3 id="totalAmount"></h3>
+        <button id="confirmOrder">✅ Confirm & Send to WhatsApp</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- JS -->
+  <script src="scripts/order.js"></script>
+</body>
+</html>

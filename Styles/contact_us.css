@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #0077ff, #0089af);
+  color: rgb(34, 32, 32);
+  overflow-x: hidden;
+}
+
+/* Header */
+.contact-header {
+  text-align: center;
+  padding: 60px 20px 30px;
+  animation: fadeDown 1s ease forwards;
+}
+
+.contact-header h1 {
+  font-size: 3rem;
+  letter-spacing: 2px;
+  text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+.contact-header p {
+  font-size: 1.1rem;
+  margin-top: 10px;
+  opacity: 0.85;
+}
+
+/* Contact container */
+.contact-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 40px 20px;
+}
+
+/* Contact Form */
+.contact-box {
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 20px;
+  width: 350px;
+  animation: fadeUp 1.5s ease forwards;
+  transform: translateY(40px);
+  opacity: 0;
+}
+
+.contact-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.contact-box input,
+.contact-box textarea {
+  width: 100%;
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+}
+
+.contact-box button {
+  width: 100%;
+  padding: 12px;
+  background: #ffd502;
+  color: #000000;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.contact-box button:hover {
+  background: #ffd633;
+  transform: scale(1.05);
+}
+
+/* Info Box */
+.info-box {
+  width: 350px;
+  padding: 30px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  animation: fadeUp 1.7s ease forwards;
+  transform: translateY(40px);
+  opacity: 0;
+}
+
+.info-box h2 {
+  margin-bottom: 20px;
+}
+
+.info-box a {
+  color: #4d4002;
+  text-decoration: none;
+}
+
+.info-box p {
+  margin: 8px 0;
+  font-size: 1rem;
+}
+
+.social-icons {
+  margin-top: 20px;
+}
+
+.social-icons img {
+  width: 35px;
+  margin: 0 10px;
+  transition: transform 0.3s;
+}
+
+.social-icons img:hover {
+  transform: scale(1.2);
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  font-size: 0.9rem;
+  margin-top: 30px;
+}
+
+@keyframes fadeUp {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.body{
+    background-image: url(contact\ us.jpg);
+}

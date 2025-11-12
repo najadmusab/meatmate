@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Add Goat Shop</title>
+  <style>
+    /* ====== GLOBAL ====== */
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1b1b1b);
+      color: #f1f1f1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 700px;
+      background: #1e1e1e;
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(0, 255, 120, 0.25);
+      padding: 28px;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 24px;
+      color: #00ff99;
+      font-size: 1.8rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 14px;
+      font-weight: 600;
+      color: #ddd;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px 14px;
+      margin-top: 6px;
+      border-radius: 8px;
+      border: 1px solid #333;
+      background: #2a2a2a;
+      color: #fff;
+      outline: none;
+      transition: 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #00ff99;
+      background: #333;
+    }
+
+    /* ====== UPLOAD BOX ====== */
+    #uploadBox {
+      margin-top: 18px;
+      border: 2px dashed #444;
+      background: #2a2a2a;
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+      text-align: center;
+      color: #aaa;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    #uploadBox:hover {
+      border-color: #00ff99;
+      color: #00ff99;
+      background: #1e1e1e;
+    }
+
+    #uploadBox input[type="file"] {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    /* ====== PREVIEW ====== */
+    #previewContainer {
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    #previewImage {
+      width: 180px;
+      height: auto;
+      border-radius: 10px;
+      border: 2px solid #333;
+      box-shadow: 0 0 15px rgba(0, 255, 120, 0.25);
+    }
+
+    /* ====== BUTTON ====== */
+    #uploadBtn {
+      display: block;
+      width: 100%;
+      margin-top: 24px;
+      padding: 12px 14px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      background: #00c46a;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #uploadBtn:hover:not(:disabled) {
+      background: #00e07a;
+      transform: scale(1.02);
+    }
+
+    #uploadBtn:disabled {
+      background: #555;
+      cursor: not-allowed;
+    }
+
+    .status-message {
+      margin-top: 10px;
+      text-align: center;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    .back-home {
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+      margin-top: 18px;
+      text-decoration: none;
+      color: #aaa;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .back-home:hover {
+      color: #00ff99;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>🐐 Add Your Goat Shop</h1>
+
+    <form id="shopForm" onsubmit="return false;">
+      <label>Shop Name:</label>
+      <input type="text" id="shopName" placeholder="Enter shop name" required />
+
+      <label>Location:</label>
+      <input type="text" id="shopLocation" placeholder="Enter shop location" required />
+
+      <label>Phone Number:</label>
+      <input type="tel" id="shopPhone" placeholder="Enter contact number" required />
+
+      <label>Price (₹/kg):</label>
+      <input type="number" id="goatPrice" placeholder="Enter price per kg" required />
+
+      <label>Available Weight (kg):</label>
+      <input type="number" id="goatWeight" placeholder="Enter available weight" required />
+
+      <div id="uploadBox">
+        <div>📸 Drag & drop an image here — or click to upload</div>
+        <input type="file" id="fileInput" accept="image/*" />
+      </div>
+
+      <div id="previewContainer">
+        <img id="previewImage" alt="Preview" />
+      </div>
+
+      <button id="uploadBtn" type="button" disabled>
+        <span id="uploadBtnText">Upload Goat Shop</span>
+      </button>
+
+      <div id="statusMessage" class="status-message"></div>
+    </form>
+
+    <a href="index.html" class="back-home">← Back to Goat Port</a>
+  </div>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+  <!-- Upload Script (corrected path) -->
+  <script src="script/upload_goat.js"></script>
+</body>
+</html>
