@@ -112,23 +112,32 @@
     <h1 class="intro-title">GOAT PORT</h1>
   </div>
 
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="nav-left">
-      <img src="../images/goat logo.jpg" alt="Logo" class="nav-logo" />
-      <h2>GOAT PORT</h2>
-    </div>
-    <nav class="nav-right">
-      <ul>
-        <a href="#">Home</a>
-        <a href="about.html">About Us</a>
-        <a href="../contact.html">Contact</a>
-        <a href="shop.html">Shop</a>
-        <a href="#" id="manageShopsBtn">Manage Shops</a>
-        <div id="menu-icon" class="menu-icon">&#9776;</div>
-      </ul>
-    </nav>
-  </header>
+<!-- Navbar -->
+<header class="navbar">
+  <div class="nav-left">
+    <img src="../images/goat logo.jpg" alt="Logo" class="nav-logo" />
+    <h2>GOAT PORT</h2>
+  </div>
+
+  <div id="menu-icon" class="menu-icon">&#9776;</div>
+
+  <nav class="nav-right">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="#" id="manageShopsBtn">Manage Shops</a></li>
+    </ul>
+  </nav>
+  <!-- Single-Rope Hanging Goat Rate Board -->
+<div class="goat-board">
+  <h3>🐐 Goat Rate</h3>
+  <p id="goatRate">₹760 / kg</p>
+</div>
+
+</header>
+
 
   <!-- Port Buttons -->
   <div class="port-buttons">
@@ -182,6 +191,21 @@
       <p class="privacy">© 2025 Goat Port | Privacy Policy</p>
     </div>
   </footer>
+  <script>
+const menuIcon = document.getElementById("menu-icon");
+const navRight = document.querySelector(".nav-right");
+const menuClose = document.getElementById("menu-close");
+
+menuIcon.addEventListener("click", () => {
+  navRight.classList.add("active");
+});
+
+menuClose.addEventListener("click", () => {
+  navRight.classList.remove("active");
+});
+
+</script>
+
 
   <!-- Firebase + Display Script -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
