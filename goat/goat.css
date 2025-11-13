@@ -1,42 +1,61 @@
-/* --- Intro Screen --- */
+/* === Goat Port Intro Animation === */
 #intro-screen {
-  position: fixed;
-  background: #556B2F; /* Dark olive green for Goat Port */
-  width: 100%;
-  height: 100vh;
-  top: 0;
-  left: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  animation: fadeOut 2s ease-in-out 3s forwards;
+  height: 100vh;
+  width: 100%;
+  background: radial-gradient(circle at center, #3a2500, #000);
+  color: #d4a017;
+  font-size: 2rem;
+  animation: fadeOut 1.8s ease 3s forwards;
+  position: fixed;
+  top: 0;
+  left: 0;
   z-index: 1000;
 }
-.intro-logo {
+
+/* 🐐 Goat Logo Floating Effect */
+#intro-screen .intro-logo {
   width: 120px;
-  animation: bounce 2s infinite;
-}
-.intro-title {
-  color: white;
-  font-size: 3rem;
-  margin-top: 20px;
-  animation: fadeIn 2s ease-in-out;
-  text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+  border-radius: 50%;
+  animation: float 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px rgba(212, 160, 23, 0.6));
 }
 
-/* --- Animations --- */
-@keyframes bounce {
+/* ✨ Title Fade In and Golden Glow */
+#intro-screen .intro-title {
+  color: #ffcc33;
+  font-size: 3rem;
+  margin-top: 20px;
+  text-shadow: 0 0 15px rgba(212, 160, 23, 0.9);
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* === Animations === */
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-12px); }
 }
-@keyframes fadeOut {
-  to { opacity: 0; visibility: hidden; }
-}
+
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
+
+/* Optional hidden state after intro */
+.hidden {
+  display: none;
+}
+
 
 /* --- Navbar --- */
 .navbar {
@@ -285,22 +304,7 @@ footer {
   transform: scale(1.05);
 }
 
-/* --- Body Background --- */
-.body {
-  background-color: #E6F0D4; /* Light green/earthy for Goat Port */
-}
-.port-buttons{
-    background-color: rgb(4, 185, 97);
-  border: bold;
-  color: white;
-  padding: 10px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
+
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -339,4 +343,317 @@ footer {
 .btn-call:hover, .btn-order:hover {
   background: #2ecc71;
 }
+/* 🌑 Dark Gradient Theme */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #0b0b0b, #1a1a1a);
+  color: #fff;
+}
+
+/* 🐐 Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(25, 25, 25, 0.95);
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.nav-left h2 {
+  color: #b8860b;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+/* Navigation Links */
+.nav-right ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+}
+
+.nav-right ul li {
+  list-style: none;
+}
+
+.nav-right ul a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-right ul a:hover {
+  color: #b8860b;
+}
+
+/* 🍔 Mobile Menu Icon */
+.menu-icon {
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #b8860b;
+  display: none;
+  transition: transform 0.3s ease;
+}
+
+.menu-icon:hover {
+  transform: rotate(90deg);
+}
+/* === Mobile Menu Close Button === */
+.menu-close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 2rem;
+  color: #b8860b;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.7);
+  transition: all 0.3s ease;
+}
+
+.nav-right.active .menu-close {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.menu-close:hover {
+  color: #e3b44b;
+  transform: scale(1.2);
+}
+
+
+/* 📱 Responsive Navbar */
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+    font-size: 2rem;
+    color: #b8860b;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
+  .menu-icon:hover {
+    color: #e3b44b;
+    transform: rotate(90deg);
+  }
+
+  .nav-right {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100%;
+    background: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(8px);
+    box-shadow: -2px 0 20px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: right 0.4s ease;
+    z-index: 999;
+  }
+
+  .nav-right.active {
+    right: 0;
+  }
+
+  .nav-right ul {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-right ul a {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .nav-right ul a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #b8860b;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+
+  .nav-right ul a:hover {
+    color: #b8860b;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .nav-right ul a:hover::after {
+    width: 60%;
+  }
+}
+
+
+
+/* 🔽 Slide Animation */
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 🧈 Port Buttons */
+.port-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px auto;
+  padding: 10px;
+}
+
+.port-btn {
+  background: linear-gradient(135deg, #111, #2b2b2b);
+  color: #b8860b;
+  border: 1px solid #b8860b;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.port-btn:hover {
+  background: #b8860b;
+  color: #111;
+  transform: translateY(-2px);
+}
+
+.port-btn.active {
+  background: #b8860b;
+  color: #111;
+}
+
+/* Footer Styling (to match dark theme) */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #0e0e0e;
+  border-top: 1px solid #333;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #b8860b;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+/* 🪵 Goat Hanging Board (Single Rope Version) */
+.goat-board {
+  position: fixed;
+  top: 75px; /* just below navbar */
+  right: 25px;
+  background: linear-gradient(145deg, #7b4b10, #b47a3a);
+  border: 2px solid #3a1e04;
+  border-radius: 10px;
+  padding: 12px 22px;
+  text-align: center;
+  color: #fff1c7;
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4),
+              inset 0 2px 6px rgba(255, 255, 255, 0.1);
+  transform-origin: top center;
+  animation: swingGoat 3s ease-in-out infinite;
+  z-index: 99;
+}
+
+/* 🪢 Single Hanging Rope */
+.goat-board::before {
+  content: "";
+  position: absolute;
+  top: -25px;
+  left: 70%;
+  transform: translateX(-50%);
+  width: 2.5px;
+  height: 25px;
+  background: #d1b07c;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+}
+
+/* Text styling */
+.goat-board h3 {
+  font-size: 1rem;
+  margin: 0;
+  color: #ffe9b0;
+  text-shadow: 0 1px 2px #000;
+}
+
+.goat-board p {
+  font-size: 1.3rem;
+  margin: 4px 0 0;
+  color: #fff8dc;
+  text-shadow: 0 0 8px rgba(255, 200, 100, 0.6);
+}
+
+/* 🌊 Swing animation */
+@keyframes swingGoat {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(1.3deg); }
+  50% { transform: rotate(-1.3deg); }
+  75% { transform: rotate(1.3deg); }
+}
+
+/* 📱 Mobile adjustments */
+@media (max-width: 600px) {
+  .goat-board {
+    right: 10px;
+    top: 65px;
+    padding: 8px 14px;
+  }
+
+  .goat-board h3 {
+    font-size: 0.9rem;
+  }
+
+  .goat-board p {
+    font-size: 1.1rem;
+  }
+}
+
+
 
