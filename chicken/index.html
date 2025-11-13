@@ -22,14 +22,27 @@
     </div>
     <nav class="nav-right">
       <ul>
-        <a href="#">Home</a>
+        <a href="../index.html"></a>
         <a href="about.html">About us</a>
         <a href="../contact.html">Contact</a>
         <a href="shop.html">Shop</a>
         <a href="#" id="manageShopsBtn">Manage Shops</a>
       </ul>
-      <div id="menu-icon" class="menu-icon">&#9776;</div>
+      <div id="menu-icon" class="menu-icon">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
     </nav>
+    <!-- 🪵 Hanging Rate Board -->
+<div class="rate-board">
+  <div class="rope"></div>
+  <div class="board">
+    <span class="label">🐔 Today’s Rate:</span>
+    <span class="flip" id="rateValue">₹195/kg</span>
+  </div>
+</div>
   </header>
 
   <!-- Port Buttons -->
@@ -66,7 +79,6 @@
     <h2>Manage Shops</h2>
     <div id="manageShopList"></div>
   </section>
-
   <!-- Footer -->
   <footer>
     <div class="footer-content">
@@ -82,6 +94,32 @@
       <p class="privacy">© 2025 Chicken Port | Privacy Policy</p>
     </div>
   </footer>
+  <script>
+function updateRate(newRate) {
+  const rate = document.getElementById("rateValue");
+  rate.style.animation = "none";
+  rate.offsetHeight; // reset
+  rate.textContent = newRate;
+  rate.style.animation = "flipIn 0.8s ease";
+}
+</script>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const menuIcon = document.getElementById("menu-icon");
+  const navRight = document.querySelector(".nav-right");
+
+  if (menuIcon && navRight) {
+    menuIcon.addEventListener("click", () => {
+      navRight.classList.toggle("active");
+      menuIcon.classList.toggle("active"); // animate icon too
+    });
+  }
+});
+
+</script>
+
+
 
   <!-- Firebase + Scripts -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
