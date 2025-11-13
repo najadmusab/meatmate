@@ -113,22 +113,32 @@
   </div>
 
   <!-- Navbar -->
-  <header class="navbar">
-    <div class="nav-left">
-      <img src="../images/beef logo.jpg" alt="Logo" class="nav-logo" />
-      <h2>BEEF PORT</h2>
-    </div>
-    <nav class="nav-right">
-      <ul>
-        <a href="#">Home</a>
-        <a href="about.html">About Us</a>
-        <a href="../contact.html">Contact</a>
-        <a href="shop.html">Shop</a>
-        <a href="#" id="manageShopsBtn">Manage Shops</a>
-        <div id="menu-icon" class="menu-icon">&#9776;</div>
-      </ul>
-    </nav>
-  </header>
+<header class="navbar">
+  <div class="nav-left">
+    <img src="../images/beef logo.jpg" alt="Logo" class="nav-logo" />
+    <h2>BEEF PORT</h2>
+  </div>
+
+  <div id="menu-icon" class="menu-icon">&#9776;</div>
+
+  <nav class="nav-right">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="#" id="manageShopsBtn">Manage Shops</a></li>
+    </ul>
+  </nav>
+<!-- Wooden Hanging Beef Rate Board -->
+<div class="wooden-board">
+  <h3>🥩 Beef Rate</h3>
+  <p id="beefRate">₹340 / kg</p>
+</div>
+
+
+</header>
+
 
   <!-- Port Buttons -->
   <div class="port-buttons">
@@ -182,6 +192,16 @@
       <p class="privacy">© 2025 Beef Port | Privacy Policy</p>
     </div>
   </footer>
+<script>
+  const menuIcon = document.getElementById("menu-icon");
+  const navRight = document.querySelector(".nav-right");
+
+  menuIcon.addEventListener("click", () => {
+    navRight.classList.toggle("active");
+  });
+</script>
+
+
 
   <!-- Firebase + Display Script -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
