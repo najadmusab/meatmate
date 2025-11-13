@@ -1,35 +1,59 @@
-/* --- Intro Screen --- */
+/* === Chicken Port Intro Animation === */
 #intro-screen {
-  position: fixed;
-  background: #0077ff;
-  width: 100%;
-  height: 100vh;
-  top: 0;
-  left: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  animation: fadeOut 2s ease-in-out 3s forwards;
+  height: 100vh;
+  width: 100%;
+  background: radial-gradient(circle at center, #210303, #000);
+  color: #ffcc00;
+  font-size: 2rem;
+  animation: fadeOut 1.8s ease 3s forwards;
+  position: fixed;
+  top: 0;
+  left: 0;
   z-index: 1000;
 }
-.intro-logo {
+
+/* 🐥 Chicken Logo Floating Effect */
+#intro-screen .intro-logo {
   width: 120px;
-  animation: bounce 2s infinite;
-}
-.intro-title {
-  color: white;
-  font-size: 3rem;
-  margin-top: 20px;
-  animation: fadeIn 2s ease-in-out;
+  border-radius: 50%;
+  animation: float 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.6));
 }
 
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+/* ✨ Title Fade In and Glow */
+#intro-screen .intro-title {
+  color: #ffcc00;
+  font-size: 3rem;
+  margin-top: 20px;
+  text-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
+  animation: fadeIn 1.5s ease-in-out;
 }
+
+/* === Animations === */
 @keyframes fadeOut {
-  to { opacity: 0; visibility: hidden; }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Optional hidden state after intro */
+.hidden {
+  display: none;
 }
 
 /* --- Navbar --- */
@@ -139,7 +163,7 @@
 
 /* --- Footer --- */
 footer {
-  background: #00132b;
+  background: #0b1e35;
   color: white;
   text-align: center;
   padding: 20px;
@@ -259,20 +283,16 @@ footer {
   background: #cc0000;
   transform: scale(1.05);
 }
-.boddy{
-  background-color: #f5dddd;
-}
 /* ===== Shop Listing Section ===== */
 .shops-section {
   text-align: center;
   padding: 60px 20px;
-  background: #f5dddd;
   color: #fff;
 }
 
 .shops-section h2 {
   font-size: 2rem;
-  color: #000000;
+  color: #c47e7e;
   margin-bottom: 30px;
   letter-spacing: 1px;
 }
@@ -364,10 +384,498 @@ footer {
   background: #00a774;
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 600px) {
-  .image-card {
-    width: 90%;
+/* === RESPONSIVE FIXES === */
+@media (max-width: 900px) {
+  /* Navbar layout */
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .nav-right ul {
+    display: none;
+    flex-direction: column;
+    background: #063b80;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .nav-right ul a {
+    display: block;
+    margin: 10px 0;
+    font-size: 1.1rem;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  /* Show menu when active */
+  .nav-right.active ul {
+    display: flex;
+  }
+
+  /* Adjust port buttons */
+  .port-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .port-btn {
+    width: 100%;
+    max-width: 300px;
+    font-size: 1rem;
+  }
+
+  /* Search section */
+  .search-section input {
+    width: 80%;
+  }
+
+  /* Footer stacking */
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-info, .social-icons {
+    margin-bottom: 10px;
+  }
+
+  .social-icons img {
+    width: 30px;
   }
 }
+
+/* For very small phones */
+@media (max-width: 480px) {
+  .intro-title {
+    font-size: 2rem;
+  }
+
+  .nav-left h2 {
+    font-size: 1.2rem;
+  }
+
+  .port-btn {
+    font-size: 0.9rem;
+    padding: 8px 10px;
+  }
+
+  .shops-section {
+    padding: 30px 10px;
+    
+  }
+
+  .shop-card, .image-card {
+    width: 95%;
+  }
+}
+/* === Beautiful Animated Hamburger === */
+.menu-icon {
+  width: 32px;
+  height: 24px;
+  display: none; /* hidden on desktop */
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.menu-icon span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: white;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* When menu active (X shape animation) */
+.menu-icon.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+.menu-icon.active span:nth-child(2) {
+  opacity: 0;
+}
+.menu-icon.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+/* Mobile show */
+@media (max-width: 900px) {
+  .menu-icon {
+    display: flex;
+  }
+
+  /* Smooth dropdown animation for menu */
+  .nav-right ul {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s ease;
+  }
+
+  .nav-right.active ul {
+    max-height: 300px;
+    opacity: 1;
+  }
+}
+/* === Enhanced Navbar Style & Animation === */
+.navbar {
+  background: linear-gradient(90deg, #00132b, #002b5c);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Navbar links desktop */
+.nav-right a {
+  position: relative;
+  padding: 8px 14px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-right a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background: #00aaff;
+  transition: width 0.3s ease;
+}
+
+.nav-right a:hover {
+  color: #00aaff;
+}
+.nav-right a:hover::after {
+  width: 100%;
+}
+
+/* === Mobile Dropdown Beautiful Style === */
+@media (max-width: 900px) {
+  .nav-right ul {
+    flex-direction: column;
+    background: rgba(0, 19, 43, 0.9);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    position: absolute;
+    top: 65px;
+    left: 0;
+    text-align: center;
+    padding: 15px 0;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    opacity: 0;
+    max-height: 0;
+    transition: all 0.5s ease;
+  }
+
+  .nav-right.active ul {
+    opacity: 1;
+    max-height: 400px;
+  }
+
+  .nav-right ul a {
+    display: block;
+    margin: 10px 0;
+    font-size: 1.2rem;
+    color: white;
+    transition: transform 0.3s ease, background 0.3s ease;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .nav-right ul a:hover {
+    background: rgba(0, 170, 255, 0.2);
+    transform: scale(1.05);
+  }
+
+  /* Menu icon positioning */
+  .menu-icon {
+    display: flex;
+    position: relative;
+    z-index: 110;
+  }
+
+  /* Smooth “X” animation (from earlier) */
+  .menu-icon span {
+    background: white;
+  }
+}
+/* === Compact Dark Gradient Port Buttons === */
+.port-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 15px 0 25px;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.port-btn {
+  background: linear-gradient(135deg, #0d1b2a, #1b263b);
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  opacity: 0;
+  animation: riseIn 0.7s ease forwards;
+}
+
+.port-buttons a:nth-child(1) .port-btn { animation-delay: 0.1s; }
+.port-buttons a:nth-child(2) .port-btn { animation-delay: 0.2s; }
+.port-buttons a:nth-child(3) .port-btn { animation-delay: 0.3s; }
+.port-buttons a:nth-child(4) .port-btn { animation-delay: 0.4s; }
+
+.port-btn:hover {
+  background: linear-gradient(135deg, #1b263b, #415a77);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 12px rgba(0, 170, 255, 0.25);
+}
+
+.port-btn:active {
+  transform: scale(0.95);
+}
+
+.port-btn.active {
+  background: linear-gradient(135deg, #ff7b00, #ffb300);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+  border: none;
+}
+
+/* --- Animations --- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(15px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Responsive tweak */
+@media (max-width: 600px) {
+  .port-btn {
+    width: 80%;
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+}
+/* 🌒 Dark Gradient Background */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #0a0a0a, #1a1a1a, #111827, #000);
+  background-size: 400% 400%;
+  animation: gradientShift 12s ease infinite;
+  color: #fff;
+  min-height: 100vh;
+}
+
+/* 💫 Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #0d1117, #1e293b);
+  padding: 12px 25px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  animation: slideDown 0.8s ease;
+}
+
+/* 🔹 Logo + Title */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-logo {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 170, 255, 0.4);
+}
+.nav-left h2 {
+  color: #00aaff;
+  letter-spacing: 1px;
+}
+
+/* 🔸 Navigation Links */
+.nav-right ul {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+.nav-right a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+}
+.nav-right a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background: #00aaff;
+  transition: width 0.3s ease;
+}
+.nav-right a:hover {
+  color: #00aaff;
+}
+.nav-right a:hover::after {
+  width: 100%;
+}
+
+/* 🍔 Mobile Menu Icon */
+.menu-icon {
+  font-size: 1.8rem;
+  color: #00aaff;
+  display: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.menu-icon:hover {
+  transform: rotate(90deg);
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .nav-right ul {
+    position: absolute;
+    top: 65px;
+    left: 0;
+    width: 100%;
+    background: rgba(17, 24, 39, 0.95);
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 0;
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+  .nav-right.active ul {
+    display: flex;
+  }
+  .menu-icon {
+    display: block;
+  }
+}
+
+/* ✨ Animations */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* === HANGING WOODEN RATE BOARD === */
+.rate-board {
+  position: absolute;
+  top: 58px; /* attach right below navbar */
+  right: 60px;
+  text-align: center;
+  transform-origin: top center;
+  animation: swing 3s ease-in-out infinite;
+  pointer-events: none; /* ✅ allows clicking behind */
+  z-index: 20;
+}
+
+/* Rope connecting to navbar */
+.rope {
+  width: 2px;
+  height: 35px;
+  background: #d4b373;
+  margin: 0 auto;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Wooden Board Style */
+.board {
+  background: linear-gradient(145deg, #4b2c0b, #2c1603);
+  border: 2px solid #1a0d03;
+  border-radius: 8px;
+  padding: 8px 20px;
+  color: #ffecb3;
+  font-weight: 600;
+  font-size: 1rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+  transform-origin: top center;
+}
+
+.label {
+  color: #ffe97f;
+  margin-right: 6px;
+}
+
+/* Flip animation for the rate */
+.flip {
+  display: inline-block;
+  animation: flipIn 1s ease;
+  transform-origin: center;
+}
+
+/* === Animations === */
+@keyframes swing {
+  0%, 100% { transform: rotate(2deg); }
+  50% { transform: rotate(-2deg); }
+}
+
+@keyframes flipIn {
+  0% { transform: rotateX(90deg); opacity: 0; }
+  100% { transform: rotateX(0); opacity: 1; }
+}
+
+/* === 📱 Responsive Fix === */
+@media (max-width: 768px) {
+  .rate-board {
+    position: absolute;
+    top: 65px; /* stays just under navbar */
+    left: 80%;
+    right: auto;
+    transform: translateX(-50%);
+    animation: swing 2.5s ease-in-out infinite;
+  }
+
+  .board {
+    font-size: 0.9rem;
+    padding: 6px 14px;
+  }
+}
+
+
+
 
