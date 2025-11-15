@@ -95,7 +95,7 @@ function renderGallery(images) {
         <div class="image-card">
           <img src="${img.image}" alt="${img.fishName || "Chicken"}" />
           <div class="image-info">
-            <h3>${img.fishName || "Unnamed Chicken"}</h3>
+            <h3>${img.fishName || "Fresh Chicken"}</h3>
             <p><strong>🏪 Shop:</strong> ${img.shopName || "Unknown"}</p>
             <p><strong>📍 Location:</strong> ${img.location || "Not specified"}</p>
             <p><strong>💰 Price per kg:</strong> ₹${price}</p>
@@ -149,3 +149,4 @@ function orderChicken(index, chickenName, shopName, location, price) {
 
   window.open(`https://wa.me/9526226011?text=${message}`, "_blank");
 }
+
