@@ -36,11 +36,11 @@ function setupUploadUI() {
     uploadBox.classList.add("dragover");
   });
   uploadBox.addEventListener("dragleave", () => uploadBox.classList.remove("dragover"));
-  uploadBox.addEventListener("drop", (e) => {
-    e.preventDefault();
-    uploadBox.classList.remove("dragover");
-    handleFile(e.dataTransfer.files[0]));
-  });
+uploadBox.addEventListener("drop", (e) => {
+  e.preventDefault();
+  uploadBox.classList.remove("dragover");
+  handleFile(e.dataTransfer.files[0]);
+});
 
   function handleFile(file) {
     if (!file || !file.type.startsWith("image/")) {
@@ -112,3 +112,4 @@ function setupUploadUI() {
     setTimeout(() => status.classList.remove("show"), 4000);
   }
 }
+
