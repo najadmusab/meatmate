@@ -1,4 +1,4 @@
-// 🟢 Firebase Image Uploader (Beef Version)
+// 🟢 Firebase Image Uploader (Chicken Version)
 const firebaseConfig = {
   apiKey: "AIzaSyBekUGQp88BILN7wvdFQOCxh3TiNx2Uf5A",
   authDomain: "meatfyll.firebaseapp.com",
@@ -39,7 +39,7 @@ function setupUploadUI() {
   uploadBox.addEventListener("drop", (e) => {
     e.preventDefault();
     uploadBox.classList.remove("dragover");
-    handleFile(e.dataTransfer.files[0]);
+    handleFile(e.dataTransfer.files[0]));
   });
 
   function handleFile(file) {
@@ -76,7 +76,7 @@ function setupUploadUI() {
       if (!shopName || !location || !phone || !price || !weight) {
         showStatus("Please fill all required fields!", "error");
         uploadBtn.disabled = false;
-        uploadBtnText.textContent = "Upload Beef";
+        uploadBtnText.textContent = "Upload Chicken";
         return;
       }
 
@@ -86,7 +86,7 @@ function setupUploadUI() {
         phone,
         price,
         weight,
-        category: "beef",
+        category: "chicken",   // ✔️ changed
         image: selectedFileBase64,
         timestamp: firebase.database.ServerValue.TIMESTAMP
       };
@@ -94,14 +94,14 @@ function setupUploadUI() {
       const newRef = database.ref("images").push();
       await newRef.set(data);
 
-      showStatus("Beef uploaded successfully! 🥩", "success");
+      showStatus("Chicken uploaded successfully! 🍗", "success");
       setTimeout(() => window.location.reload(), 1000);
     } catch (err) {
       console.error(err);
       showStatus("Upload failed: " + err.message, "error");
     } finally {
       uploadBtn.disabled = false;
-      uploadBtnText.textContent = "Upload Beef";
+      uploadBtnText.textContent = "Upload Chicken"; // ✔️ changed
     }
   }
 
